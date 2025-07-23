@@ -8,3 +8,8 @@ and then doing the following steps to properly setup your environment
 2. source .venv/bin/activate
 3. uv add google-genai==1.12.1
 4. uv add python-dotenv==1.1.0
+
+after the installation of dependencies make sure to insert your own google gemini api key
+1. in the root folder create a new file called .env
+2. paste your own api key with the following format
+   GEMINI_API_KEY="{paste your key here}"
