@@ -13,3 +13,8 @@ after the installation of dependencies make sure to insert your own google gemin
 1. in the root folder create a new file called .env
 2. paste your own api key with the following format
    GEMINI_API_KEY="{paste your key here}"
+3. paste the desired model name with the following format
+    (in this tutorial we are using gemini flash model)
+   GEMINI_MODEL_NAME="{paste your key here}"
+   Example:
+    GEMINI_MODEL_NAME="gemini-2.0-flash-001"

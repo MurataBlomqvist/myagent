@@ -9,5 +9,5 @@ wheels/
 # Virtual environments
 .venv
 
-# API keys
+# environment variables (API keys etc)
 .env
