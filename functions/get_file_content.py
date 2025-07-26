@@ -1,7 +1,7 @@
 import os
 import config
 
-def get_file_content(working_directory, file_path="."):
+def get_file_content(working_directory, file_path):
     #err_flg = True
     wrk_dir = os.path.abspath(working_directory)
     tgt_file_path = os.path.abspath(os.path.join(working_directory, file_path))
@@ -24,6 +24,6 @@ def get_file_content(working_directory, file_path="."):
             return rslt_str
 
     except Exception as e:
-        return F"Error reading file content {e}"
+        return f"Error reading file content {e}"
     
     
