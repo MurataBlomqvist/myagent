@@ -15,12 +15,27 @@ def run_python_file(working_directory, file_path, args=[]):
     if (not os.path.exists(tgt_path_file)):
         return f'Error: File "{tgt_path_file}" not found.'
     
+    if (tgt_path_file[len(tgt_path_file)-2:]):
+        return f'Error: "{file_path}" is not a Python file.'
+    
     try:
-        with open(tgt_path_file, "w") as f:
-            f.write(content)
-            return f'Successfully wrote to "{tgt_path_file}" ({len(content)} characters written)'
+        completed_prc = subprocess.run(args=args, timeout=30, capture_output=True, cwd=wrk_dir)
+        formatted_out = ""
 
+        if (completed_prc.stdout != None):
+            formatted_out += f"STDOUT:{complete_prc.stdout}\n"
+        
+        if (completed_prc.stderr != None):
+            formatted_out += f"STDERR:{completed_prc.stderr}\n"
+
+        if (completed_prc.returncode != 0):
+            formatted_out += f"Process exited with code {completed_prc.returncode}\n"
+
+        if (formatted_out == ""):
+            formatted_out = "No output produced."
+        
+        return formatted_out
     except Exception as e:
-        return f"Error reading file content {e}"
+        return f"Error: executing Python file: {e}"
     
     
