@@ -1,5 +1,6 @@
 import os
 import config
+from google.genai import types
 
 def write_file(working_directory, file_path, content):
     # get the working directory
@@ -26,4 +27,17 @@ def write_file(working_directory, file_path, content):
     except Exception as e:
         return f"Error reading file content {e}"
     
-    
+
+schema_get_files_info = types.FunctionDeclaration(
+    name="write_file",
+    description="Replace t, constrained to the working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "directory": types.Schema(
+                type=types.Type.STRING,
+                description="The directory to list files from, relative to the working directory. If not provided, lists files in the working directory itself.",
+            ),
+        },
+    ),
+)
