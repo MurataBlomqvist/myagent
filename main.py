@@ -7,6 +7,7 @@ from functions.get_files_info import schema_get_files_info
 from functions.get_file_content import schema_get_file_content
 from functions.run_python_file import schema_run_python_file
 from functions.write_file import schema_write_file
+from functions.call_function import call_function
 
 available_functions = types.Tool(
     function_declarations=[
@@ -53,13 +54,22 @@ def generate_response(model_name, api_key, verbose_flag, system_prompt, messages
             if (not functionSpec.args is None):
                 func_args = functionSpec.args
 
-            print(f"Calling function: {functionSpec.name}({func_args})")
+            called_function_result = call_function(functionSpec, verbose_flag)
+            if called_function_result.parts[0].function_response.response is None:
+                raise Exception("Error no response from function")
+
+            elif (
+                not called_function_result.parts[0].function_response.response is None
+                and verbose_flag
+            ):
+                print(f"-> {called_function_result.parts[0].function_response.response}")
+            #print(f"Calling function: {functionSpec.name}({func_args})")
     else:
         print(response.text)
         
     
     if verbose_flag:
-        print(f"User prompt: {user_prompt}")
+        print(f"User prompt: {messages[0].parts[0].text}")
         print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
         print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
 
