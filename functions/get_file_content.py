@@ -28,7 +28,7 @@ def get_file_content(working_directory, file_path):
         return f"Error reading file content {e}"
     
 
-schema_get_files_info = types.FunctionDeclaration(
+schema_get_file_content = types.FunctionDeclaration(
     name="get_file_content",
     description="Get the file content of a specific file, constrained to the working directory.",
     parameters=types.Schema(
@@ -36,11 +36,11 @@ schema_get_files_info = types.FunctionDeclaration(
         properties={
             "directory": types.Schema(
                 type=types.Type.STRING,
-                description="The directory to list files from, relative to the working directory. If not provided, lists files in the working directory itself.",
+                description="The specified working directory. If not provided, takes in the current directory itself.",
             ),
-            "file_name": types.Schema(
+            "file_path": types.Schema(
                 type=types.Type.STRING,
-                description="The file name to the specific file which its content shall be printed. If not provided, simply return (content not found)",
+                description="The file name and path to the specific file which content shall be printed. If not provided, simply return (File not found)",
             )
         },
     ),

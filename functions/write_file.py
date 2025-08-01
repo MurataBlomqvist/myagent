@@ -27,16 +27,23 @@ def write_file(working_directory, file_path, content):
     except Exception as e:
         return f"Error reading file content {e}"
     
-
-schema_get_files_info = types.FunctionDeclaration(
+schema_write_file = types.FunctionDeclaration(
     name="write_file",
-    description="Replace t, constrained to the working directory.",
+    description="overwrite the content of a specific file, constrained to the working directory.",
     parameters=types.Schema(
         type=types.Type.OBJECT,
         properties={
             "directory": types.Schema(
                 type=types.Type.STRING,
-                description="The directory to list files from, relative to the working directory. If not provided, lists files in the working directory itself.",
+                description="The specified working directory. If not provided, takes in the current directory itself.",
+            ),
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="The file name and path to the specific file which content shall be overwrited. If not provided, simply return (File not found)",
+            ),
+            "content": types.Schema(
+                type=types.Type.STRING,
+                description="The content that shall overwrite the specified file. If not provided, simply return (Content not found)",
             ),
         },
     ),
