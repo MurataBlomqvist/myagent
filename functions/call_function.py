@@ -21,7 +21,6 @@ def call_function(function_call_part, verbose=False):
     for value in function_call_part.args:
         args[value] = function_call_part.args[value]
     
-    print(args)
     func_dict = {
         "get_files_info": get_files_info
         , "get_file_content": get_file_content
